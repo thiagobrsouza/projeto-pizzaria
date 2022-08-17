@@ -7,3 +7,4 @@ router.get('/teste', (req: Request, res: Response) => {
 });
 
 export { router };
+
