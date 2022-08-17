@@ -19,6 +19,7 @@ export function isAuthenticated(req: Request, res: Response, next: NextFunction)
      // validate if token is valid and return user id
      try {
         const { sub } = verify(token, process.env.JWT_SECRET) as Payload;
+        req.userId = sub; // get a token id and set a variable userId in req
         return next();
      } catch (error) {
         return res.status(401).end();
