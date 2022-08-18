@@ -4,6 +4,7 @@ import uploadConfig from './config/multer';
 import { CreateCategoryController } from './controllers/category/CreateCategoryController';
 import { ListCategoryController } from './controllers/category/ListCategoryController';
 import { CreateOrderController } from './controllers/order/CreateOrderController';
+import { RemoveOrderController } from './controllers/order/RemoveOrderController';
 import { CreateProductController } from './controllers/product/CreateProductController';
 import { ListByCategoryController } from './controllers/product/ListByCategoryController';
 import { AuthUserController } from './controllers/user/AuthUserController';
@@ -39,6 +40,7 @@ router.get('/category/products', isAuthenticated, new ListByCategoryController()
  * Order routes
  */
 router.post('/orders', isAuthenticated, new CreateOrderController().handle);
+router.delete('/orders', isAuthenticated, new RemoveOrderController().handle);
 
 export { router };
 
