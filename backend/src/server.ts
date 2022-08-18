@@ -1,6 +1,7 @@
 import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
+import path from 'path';
 import { router } from './routes';
 
 
@@ -13,6 +14,12 @@ app.use(cors());
 
 // use routes
 app.use(router);
+
+// to access images in directory
+app.use(
+    '/files',
+    express.static(path.resolve(__dirname, '..', 'tmp'))
+);
 
 
 /**

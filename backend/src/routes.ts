@@ -1,12 +1,18 @@
 import { Router } from 'express';
+import multer from 'multer';
+import uploadConfig from './config/multer';
 import { CreateCategoryController } from './controllers/category/CreateCategoryController';
 import { ListCategoryController } from './controllers/category/ListCategoryController';
+import { CreateProductController } from './controllers/product/CreateProductController';
 import { AuthUserController } from './controllers/user/AuthUserController';
 import { CreateUserController } from './controllers/user/CreateUserController';
 import { DetailUserController } from './controllers/user/DetailUserController';
 import { isAuthenticated } from './middlewares/isAuthenticated';
 
 const router = Router();
+
+// save images
+const upload = multer(uploadConfig.upload("./tmp"));
 
 /**
  * Users routes
@@ -20,6 +26,11 @@ router.get('/me', isAuthenticated, new DetailUserController().handle);
  */
 router.post('/categories', isAuthenticated, new CreateCategoryController().handle);
 router.get('/categories', isAuthenticated, new ListCategoryController().handle);
+
+/**
+ * Product routes
+ */
+router.post('/products', isAuthenticated, upload.single('file'), new CreateProductController().handle);
 
 export { router };
 
