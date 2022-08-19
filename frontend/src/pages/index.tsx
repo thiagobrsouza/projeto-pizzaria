@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import logoImg from '../../public/logo.svg'
 import styles from '../../styles/Home.module.scss'
 import { Button } from '../components/ui/Button'
@@ -20,7 +21,9 @@ const Home: NextPage = () => {
             <Input placeholder="Digite sua senha" type="password" />
             <Button type="submit" loading={false}>Acessar</Button>
           </form>
-          <a className={styles.text}>Não possui uma conta? Cadastre-se</a>
+          <Link href="/signup">
+            <a className={styles.text}>Não possui uma conta? Cadastre-se</a>
+          </Link>
         </div>
       </div>
     </>
