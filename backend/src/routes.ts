@@ -6,6 +6,7 @@ import { ListCategoryController } from './controllers/category/ListCategoryContr
 import { AddItemsController } from './controllers/order/AddItemsController';
 import { CreateOrderController } from './controllers/order/CreateOrderController';
 import { DetailOrderController } from './controllers/order/DetailOrderController';
+import { FinishOrderController } from './controllers/order/FinishOrderController';
 import { ListOrdersController } from './controllers/order/ListOrdersController';
 import { RemoveItemController } from './controllers/order/RemoveItemController';
 import { RemoveOrderController } from './controllers/order/RemoveOrderController';
@@ -51,6 +52,7 @@ router.delete('/orders/remove', isAuthenticated, new RemoveItemController().hand
 router.put('/orders/send', isAuthenticated, new SendOrderController().handle);
 router.get('/orders', isAuthenticated, new ListOrdersController().handle);
 router.get('/orders/details', isAuthenticated, new DetailOrderController().handle);
+router.put('/orders/finish', isAuthenticated, new FinishOrderController().handle);
 
 export { router };
 
