@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import logoImg from '../../public/logo.svg'
 import styles from '../../styles/Home.module.scss'
+import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
 
 const Home: NextPage = () => {
@@ -17,6 +18,7 @@ const Home: NextPage = () => {
           <form>
             <Input placeholder="Digite seu e-mail" type="text" />
             <Input placeholder="Digite sua senha" type="password" />
+            <Button type="submit" loading={false}>Acessar</Button>
           </form>
         </div>
       </div>
