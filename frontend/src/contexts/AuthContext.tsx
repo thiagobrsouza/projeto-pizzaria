@@ -28,8 +28,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<UserProps>();
     const isAuthenticated = !!user; //se não tiver user, ele converte para false. Se tiver, se torna true
     
-    async function signIn() {
-        alert('Clicou no login');
+    async function signIn({ email, password }: SignInProps) {
+        console.log('Dados para login', email);
+        console.log('Senha', password);
     }
 
     return (
