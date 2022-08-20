@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
 import { Header } from "../../components/Header";
+import { setupAPIClient } from "../../services/api";
 import styles from './styles.module.scss';
 
 export default function Categories() {
@@ -9,7 +11,15 @@ export default function Categories() {
 
     async function handleRegister(event: FormEvent) {
         event.preventDefault();
-        alert('Categoria ' + name);
+        if (name === '') {
+            return;
+        }
+        const apiClient = setupAPIClient();
+        await apiClient.post('/categories', {
+            name: name,
+        });
+        toast.success('Categoria cadastrada com sucesso!');
+        setName('');
     }
 
 
