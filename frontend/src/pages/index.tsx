@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FormEvent, useContext, useState } from 'react'
+import { toast } from 'react-toastify'
 import logoImg from '../../public/logo.svg'
 import styles from '../../styles/Home.module.scss'
 import { Button } from '../components/ui/Button'
@@ -20,7 +21,7 @@ const Home: NextPage = () => {
   async function handleLogin(event: FormEvent) {
     event.preventDefault();
     if (email === '' || password === '') {
-      alert('Preencha os dados');
+      toast.warning('Preencha os dados');
       return;
     }
     setLoading(true);
