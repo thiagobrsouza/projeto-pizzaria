@@ -9,6 +9,7 @@ import styles from '../../styles/Home.module.scss'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
 import { AuthContext } from '../contexts/AuthContext'
+import { canSSRGuest } from '../utils/canSSRGuest'
 
 const Home: NextPage = () => {
 
@@ -53,5 +54,11 @@ const Home: NextPage = () => {
     </>
   )
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {}
+  }
+});
 
 export default Home
