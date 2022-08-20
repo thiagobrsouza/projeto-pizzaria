@@ -1,6 +1,6 @@
 import Router from 'next/router';
-import { destroyCookie, setCookie } from "nookies";
-import { createContext, ReactNode, useState } from "react";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { toast } from 'react-toastify';
 import { api } from '../services/apiClient';
 
@@ -49,6 +49,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<UserProps>();
     const isAuthenticated = !!user; //se não tiver user, ele converte para false. Se tiver, se torna true
     
+    useEffect(() => {
+        // try get something in token
+        const { '@nestauth.token': token } = parseCookies();
+        if (token) {
+            api.get('/me').then(response => {
+                const { id, name, email } = response.data;
+                setUser({ id, name, email });
+            }).catch(() => {
+                // if error, logout the user
+                signOut();
+            })
+        }
+    }, []);
+
     async function signIn({ email, password }: SignInProps) {
         try {
             const response = await api.post('/session', { email, password });
