@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { Header } from "../../components/Header";
 import { setupAPIClient } from "../../services/api";
+import { canSSRAuth } from "../../utils/canSSRAuth";
 import styles from './styles.module.scss';
 
 export default function Categories() {
@@ -42,3 +43,9 @@ export default function Categories() {
         </>
     )
 }
+
+export const getServerSideProps = canSSRAuth(async (ctx) => {
+    return {
+        props: {}
+    }
+});
