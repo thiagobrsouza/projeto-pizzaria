@@ -19,8 +19,14 @@ const Home: NextPage = () => {
 
   async function handleLogin(event: FormEvent) {
     event.preventDefault();
+    if (email === '' || password === '') {
+      alert('Preencha os dados');
+      return;
+    }
+    setLoading(true);
     let data = { email, password };
     await signIn(data);
+    setLoading(false);
   }
 
   return (
@@ -36,7 +42,7 @@ const Home: NextPage = () => {
             onChange={(e) => setEmail(e.target.value)} />
             <Input placeholder="Digite sua senha" type="password" value={password} 
             onChange={(e) => setPassword(e.target.value)} />
-            <Button type="submit" loading={false}>Acessar</Button>
+            <Button type="submit" loading={loading}>Acessar</Button>
           </form>
           <Link href="/signup">
             <a className={styles.text}>Não possui uma conta? Cadastre-se</a>
